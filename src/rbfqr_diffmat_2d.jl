@@ -86,7 +86,7 @@ function rbfqr_diffmat_2d(op, xe::Matrix{Float64}, varargs...)
 	  #--- We are just computing one operator
 		A, P = rbf_qr_mat_2d(Psi, op, xe)
 		A .= A	/ Psi.A0
-		A = rescale_op(A, Psi.rr, op)
+		A .= rescale_op(A, Psi.rr, op)
 	else
 		numop = length(op)
 		A = Array{Any}(undef,numop)
@@ -97,9 +97,9 @@ function rbfqr_diffmat_2d(op, xe::Matrix{Float64}, varargs...)
 				var = P
 			end
 			var = xe
-			A[i] = rbf_qr_mat_2d(Psi,op[i],var)[1]
-			A[i] = A[i] / Psi.A0
-			A[i] = rescale_op(A[i], Psi.rr, op[i])
+			A[i] .= rbf_qr_mat_2d(Psi,op[i],var)[1]
+			A[i] .= A[i] / Psi.A0
+			A[i] .= rescale_op(A[i], Psi.rr, op[i])
 		end
 	end
 	return A, Psi
