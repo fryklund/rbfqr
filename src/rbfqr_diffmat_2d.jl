@@ -85,7 +85,7 @@ function rbfqr_diffmat_2d(op, xe::Matrix{Float64}, varargs...)
 	if typeof(op) != Vector{String}
 	  #--- We are just computing one operator
 		A, P = rbf_qr_mat_2d(Psi, op, xe)
-		A = A	/ Psi.A0
+		A .= A	/ Psi.A0
 		A = rescale_op(A, Psi.rr, op)
 	else
 		numop = length(op)
