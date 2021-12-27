@@ -16,13 +16,13 @@ struct Psistruct
 	A0::Matrix{Float64}
 end
 
-include("Discretization.jl")
+include("RBFdiscretization.jl")
 include("rbfqr_diffmat_2d.jl")
 include("init_psi_2d.jl")
+include("../tests/rbfqr2dTests.jl")
 
-export Discretization
 export rbfqr_diffmat_2d
-export Psistruct, Tstruct, Qstruct, Rstruct
+export Psistruct
 
 
 end # end

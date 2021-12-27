@@ -1,4 +1,4 @@
-module Discretization 
+module RBFdiscretization 
 
 using LinearAlgebra
 

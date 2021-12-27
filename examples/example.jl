@@ -1,9 +1,9 @@
 using rbfqr
 using LinearAlgebra
 using Plots
-using rbfqr.Discretization
+using rbfqr.RBFdiscretization
 
-include("testfunction.jl")
+include("../tests/testfunction.jl")
 
 # The shape parameter
 ep = 0.5
@@ -21,11 +21,11 @@ xx,yy = ndgrid(x,x)
 xe = hcat(xx[:], yy[:])
 A, Psi = rbfqr_diffmat_2d("1", xe, xk, ep)
 Ax = rbfqr_diffmat_2d("x", xe, Psi)[1]
-Ay, foo = rbfqr_diffmat_2d("y", xe, Psi)[1]
-Axx, foo = rbfqr_diffmat_2d("xx", xe, Psi)[1]
-Axy, foo = rbfqr_diffmat_2d("xy", xe, Psi)[1]
-Ayy, foo = rbfqr_diffmat_2d("yy", xe, Psi)[1]
-L, foo = rbfqr_diffmat_2d("L", xe, Psi)[1]
+Ay = rbfqr_diffmat_2d("y", xe, Psi)[1]
+Axx = rbfqr_diffmat_2d("xx", xe, Psi)[1]
+Axy = rbfqr_diffmat_2d("xy", xe, Psi)[1]
+Ayy = rbfqr_diffmat_2d("yy", xe, Psi)[1]
+L = rbfqr_diffmat_2d("L", xe, Psi)[1]
 
 uk = f("0",xk)
 
