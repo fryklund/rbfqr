@@ -86,19 +86,12 @@ function init_psi_2d(ep::Float64, xk::Matrix{Float64}, rr::Float64, cc::Matrix{F
     D = EvalD_2D(ep, p1, p2, Psi.j, Psi.m, Psi.p, tolD)
     Rt = D .* Rt
   end
-	Psi =	Psistruct(
-	Psi.j,
-	Psi.m,
-	Psi.p,
-	Psi.cs,
-	ep,
-	xk,
-	Rt,
-  R.order,
-	rr,
-	cc,
-	zeros(0,2)
-	)
+	Psi.ep = ep
+	Psi.xk = xk
+	Psi.Rt = Rt
+	Psi.columns = R.order
+	Psi.rr = rr
+	Psi.cc = cc
 	return Psi
 end
 

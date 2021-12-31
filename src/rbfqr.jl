@@ -2,7 +2,7 @@ module rbfqr
 
 using LinearAlgebra
 
-struct Psistruct
+mutable struct Psistruct
 	j::Vector{Int64}
 	m::Vector{Int64}
   p::Vector{Int64}

@@ -62,19 +62,7 @@ function rbfqr_diffmat_2d(op, xe::Matrix{Float64}, varargs...)
 		Psi = init_psi_2d(ep, xk, rr, cc)
 		#--- Also compute the interpolation matrix which is reused for all ops 
 		A0, P = rbf_qr_mat_2d(Psi, "1", Psi.xk)
-		Psi =	Psistruct(
-			Psi.j,
-			Psi.m,
-			Psi.p,
-			Psi.cs,
-			Psi.ep,
-			Psi.xk,
-			Psi.Rt,
-			Psi.columns,
-			Psi.rr,
-			Psi.cc,
-			A0
-		)		
+		Psi.A0 =	A0
 	elseif length(varargs) == 1
 		Psi = varargs[1]
 		xe = hcat(xe[:,1] .- Psi.cc[1], xe[:,2] .- Psi.cc[2])

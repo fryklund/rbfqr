@@ -30,7 +30,6 @@ Ayy = rbfqr_diffmat_2d("yy", xe, Psi)[1]
 Lo = rbfqr_diffmat_2d("L", xe, Psi)[1]
 =#
 uk = f("0",xk)
-
 @test maximum(abs.(A*uk-f("0",xe))) < 1e-9
 		#=
 @test maximum(abs.(Ax*uk-f("x",xe))) < 1e-7

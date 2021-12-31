@@ -44,6 +44,8 @@ println("max error xy: ", maximum(abs.(diffxy)))
 println("max error yy: ", maximum(abs.(diffyy)))
 println("max error L: ", maximum(abs.(diffL)))
 
+#=
+# Not yet implemented
 op = ["1", "x", "y", "xx", "xy", "yy", "L"]
 Aall, Psi = rbfqr_diffmat_2d(op, xe, xk, ep); 
-
+=#
