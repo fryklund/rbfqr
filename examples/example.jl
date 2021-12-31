@@ -1,6 +1,5 @@
 using rbfqr
 using LinearAlgebra
-using Plots
 using rbfqr.RBFdiscretization
 
 include("../tests/testfunction.jl")

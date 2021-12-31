@@ -85,19 +85,20 @@ function rbfqr_diffmat_2d(op, xe::Matrix{Float64}, varargs...)
 	if typeof(op) != Vector{String}
 	  #--- We are just computing one operator
 		A, P = rbf_qr_mat_2d(Psi, op, xe)
-		A .= A	/ Psi.A0
-		A .= rescale_op(A, Psi.rr, op)
+		A = A	/ Psi.A0
+		A = rescale_op(A, Psi.rr, op)
 	else
 		numop = length(op)
 		A = Array{Any}(undef,numop)
+			# TODO: dictionary
 		@inbounds for i = 1:numop
 			if i == 1
 				var = xe
 			else
 				var = P
 			end
-			var = xe
-			A[i] .= rbf_qr_mat_2d(Psi,op[i],var)[1]
+			println(typeof(A[i]))
+			A[i], P .= rbf_qr_mat_2d(Psi,op[i],var)
 			A[i] .= A[i] / Psi.A0
 			A[i] .= rescale_op(A[i], Psi.rr, op[i])
 		end
@@ -116,8 +117,8 @@ end
 ---    xe or a structure containing precomputed data including xe
 
 --- Call patterns
---- A, T = rbf_qr_mat_2d(Psi,op,xe) First time for these points (xe)
---- A, T = rbf_qr_mat_2d(Psi,op,T)  Subsequent times with same xe
+--- A, P = rbf_qr_mat_2d(Psi,op,xe) First time for these points (xe)
+--- A, P = rbf_qr_mat_2d(Psi,op,P)  Subsequent times with same xe
 """
 function rbf_qr_mat_2d(Psi::Psistruct, op::String, varargs...)
 #--- Find out which call sign we got
