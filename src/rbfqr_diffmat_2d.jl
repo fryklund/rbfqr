@@ -84,9 +84,9 @@ function rbfqr_diffmat_2d(op, xe::Matrix{Float64}, varargs...)
 	# --- Compute the differentiation matrix/ces
 	if typeof(op) != Vector{String}
 	  #--- We are just computing one operator
-		A, P = rbf_qr_mat_2d(Psi, op, xe)
-		A = A	/ Psi.A0
-		A = rescale_op(A, Psi.rr, op)
+		B, P = rbf_qr_mat_2d(Psi, op, xe)
+		C = B	/ Psi.A0
+		A = rescale_op(C, Psi.rr, op)
 	else
 		numop = length(op)
 		A = Array{Any}(undef,numop)
