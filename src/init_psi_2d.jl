@@ -47,7 +47,7 @@ function init_psi_2d(ep::Float64, xk::Matrix{Float64}, rr::Float64, cc::Matrix{F
 	posN = -1
 	jmax = jN
 	iter = 1
-		while iterate
+	while iterate
 		#--- Add one block to C
     jmax = jmax+1
     Psi, C, T = addcblocks(ep,xk,jmax,Psi,T)
@@ -74,6 +74,9 @@ function init_psi_2d(ep::Float64, xk::Matrix{Float64}, rr::Float64, cc::Matrix{F
     end
     #--- Update the QR-factorization with the new block
     pos = findall(x -> x == Psi.j[end], Psi.j)
+		 println("iter = ", iter)
+	println("pos = ", pos)
+	println("Psi.jpos = ",Psi.j[pos])
     Q, R = IncQR(C, ep^2, Psi.j[pos], tol, Q, R)
     q = Q.q
 		iter = iter + 1
@@ -278,8 +281,15 @@ function IncQR(newC::Matrix{Float64}, bf::Float64, bj::Vector{Int64}, tol::Int64
 		# --- Remove the Q-component from all columns
 		newC = newC .- QQ * (QQ' * newC)
 		# --- Work block by block through the matrix (assuming ordered)
+		 println("Here")
 		@inbounds for j = bj[1] : bj[end]
+			 		 println("Here 2")
+			 if (max(1,j) == length(Rdef_num)+1)
+				  push!(Rdef_num,0)
+			 else
 			Rdef_num[max(1,j)] = 0 # Never defer for j=0
+				  end
+			 		 println("err")
 			# --- Locate the current block
 			pos = findall(x -> x == j, bj)
 			n = length(pos)
