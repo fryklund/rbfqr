@@ -304,7 +304,7 @@ function IncQR(newC::Matrix{Float64}, bf::Float64, bj::Vector{Int64}, tol::Int64
 			mag = log10.(dR)
 			ll = length(mag)
 			if (ll < nb)
-				mag[ll+1:nb] = mag[ll] # We have passed column N
+				 append!(mag, mag[ll] * ones(nb))
 			end
 			diff = mag[1:end-1] .- mag[2:end]
 			pp = findall(x -> x > tol, diff) # As default tolerance, I suggest 2 (100 times)
