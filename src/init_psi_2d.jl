@@ -294,8 +294,8 @@ function IncQR(newC::Matrix{Float64}, bf::Float64, bj::Vector{Int64}, tol::Int64
 			order = vcat(cols[pos], Rdef_ord[dpos])
 	    # --- QR-factorize the block with pivoting
 		  F = qr(hcat(newC[:,pos], Rdef_col[:,dpos]), Val(true)) # A[:,Enew] == Q*R
-			Qnew = F.Q
-			Rnew = F.R
+			Qnew = Matrix(F.Q)
+			Rnew = Matrix(F.R)
 			Enew = vec(F.p)
 			# --- Check the newly computed diagonal elements for significance
 		  dR = abs.(diag(Rnew))
